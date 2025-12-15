@@ -861,4 +861,18 @@ Step 12: enumerate(scores, students) with condition:
 
 ---
 
-**All outputs on Python 3.12**
+**All outputs on Python 3.12** 
+
+Claude AI Prompt used to generate these questions:  
+
+```
+Want to run assessment, don't give answers.
+Give sample codes and ask for output one question at a time.
+
+z = (1, 4, 11, 44, 66)
+for n in range(len(z)):
+    print(n, z[n])
+
+Only use tuples, range, len, for-in and generate samples.
+Give 5-8 lines code.
+```
