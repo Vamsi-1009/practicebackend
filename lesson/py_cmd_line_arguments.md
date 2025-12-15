@@ -24,7 +24,7 @@ python3 flight_insert.py Visakhapatnam Vijayawada 90
 ```
 ### Output:
 ```bash
-['flight_insert.py', 'Visakhapatnam', 'Vijayawada', '10']
+['flight_insert.py', 'Visakhapatnam', 'Vijayawada', '90']
 ```
 ### Key points
 
