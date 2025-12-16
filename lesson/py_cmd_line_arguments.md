@@ -20,11 +20,11 @@ print(sys.argv)
 ```
 ### Run:
 ```bash
-python3 flight_insert.py Visakhapatnam Vijayawada 90
+python3 cmd_flight_insert.py Visakhapatnam Vijayawada 90
 ```
 ### Output:
 ```bash
-['flight_insert.py', 'Visakhapatnam', 'Vijayawada', '90']
+['cmd_flight_insert.py', 'Visakhapatnam', 'Vijayawada', '90']
 ```
 ### Key points
 
@@ -40,7 +40,7 @@ python3 flight_insert.py Visakhapatnam Vijayawada 90
 import sys
 
 if len(sys.argv) != 4:
-    print("Usage: python3 flight_insert.py <origin> <destination> <duration>")
+    print("Usage: python3 cmd_flight_insert.py <origin> <destination> <duration>")
     sys.exit(1)
 
 origin = sys.argv[1]
@@ -70,9 +70,9 @@ table_number = int(sys.argv[1])
 
 ## 5. Flights SQLite
 #### Convert these programs to accept command line arguments
-- flight_insert.py <origin> <destination> <duration> // e.g: python3 flight_insert.py Visakhapatnam Vijayawada 90
-- flights_starting.py <origin> // e.g: python3 flights_starting.py Visakhapatnam
-- flights_between.py <origin> <destination>  // e.g: python3 flights_between.py Visakhapatnam Vijayawada
+- cmd_flight_insert.py <origin> <destination> <duration> // e.g: python3 flight_insert.py Visakhapatnam Vijayawada 90
+- cmd_flights_starting.py <origin> // e.g: python3 cmd_flights_starting.py Visakhapatnam
+- cmd_flights_between.py <origin> <destination>  // e.g: python3 cmd_flights_between.py Visakhapatnam Vijayawada
 
 ---
 
