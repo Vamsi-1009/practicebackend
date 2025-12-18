@@ -1,3 +1,71 @@
+# Debugger commands needed for this exercise
+
+**Current instruction address (where you are now)**
+```
+(lldb) register read pc
+```
+or
+```
+(lldb) p/x $pc
+```
+
+**To see the return address that will be stored in the new frame**
+
+Set a breakpoint at the function entry, then once you're inside the called function:
+```
+(lldb) register read lr
+```
+(on ARM) or check the stack for the return address on x86:
+```
+(lldb) x/a $sp
+(lldb) x/a $rbp+8
+```
+
+**Step-by-step demonstration**
+
+1. Break right before the call:
+```
+(lldb) b main
+(lldb) run
+(lldb) disassemble
+```
+
+2. Note the address of the instruction *after* the `call`/`bl` — that's what gets saved as the return address.
+
+3. Step into the function:
+```
+(lldb) si
+```
+
+4. Now examine the stack frame:
+```
+(lldb) frame info
+(lldb) bt
+```
+
+5. To see the raw return address on the stack (x86-64):
+```
+(lldb) x/a $rbp+8
+```
+
+**Using `bt` for a quick view**
+```
+(lldb) bt
+```
+The backtrace shows each frame with its return address — how the call stack builds up with saved addresses.
+
+**Comparing before and after the call**
+
+This sequence helps to see the return address in stack frames:
+```
+(lldb) p/x $pc          # current location
+(lldb) si               # step into the function
+(lldb) p/x $pc          # now at function start
+(lldb) frame info       # shows return address
+```
+
+---
+
 # Function Call Stack
 
 ## sum_of_two and max_of_two functions
