@@ -16,10 +16,6 @@ or
 
 Set a breakpoint at the function entry, then once you're inside the called function:
 ```
-(lldb) register read lr
-```
-(on ARM) or check the stack for the return address on x86:
-```
 (lldb) x/a $sp
 (lldb) x/a $rbp+8
 ```
@@ -86,7 +82,7 @@ int main()
     int max, sum;
     num1 = 2;
     num2 = 3;
-    
+
     max = max_of_two(num1, num2);
     sum = sum_of_two(num1, num2);
     printf("%d is greater.\n", max);
@@ -96,8 +92,8 @@ int main()
 
 int max_of_two(int num1, int num2)
 {
-	int max;
-	
+    int max;
+
     if (num2 > num1)
     {
     	max = num2;
