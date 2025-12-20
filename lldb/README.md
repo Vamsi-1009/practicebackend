@@ -9,21 +9,15 @@ This guide explains how to set up the `aik bt` command in LLDB.
 
 ## Installation Steps
 
-### 1. Create the LLDB scripts directory
-
-```bash
-mkdir -p ~/.lldb
-```
-
-### 2. Copy the required files
+### 1. Copy the required files
 
 Copy the following files to `~/.lldb/`:
 - `aik_bt.py`
 - `aik_renderer.py`
 
 ```bash
-cp aik_bt.py ~/.lldb/
-cp aik_renderer.py ~/.lldb/
+curl https://raw.githubusercontent.com/aikaryashala/practice/refs/heads/main/lldb/aik_bt.py -o ~/.lldb/aik_bt.py
+curl https://raw.githubusercontent.com/aikaryashala/practice/refs/heads/main/lldb/aik_renderer.py -o ~/.lldb/aik_renderer.py
 ```
 
 ### 3. Configure LLDB initialization
@@ -32,12 +26,6 @@ Add the following line to your `~/.lldbinit` file:
 
 ```
 command script import ~/.lldb/aik_bt.py
-```
-
-If `~/.lldbinit` doesn't exist, create it:
-
-```bash
-echo "command script import ~/.lldb/aik_bt.py" >> ~/.lldbinit
 ```
 
 ### 4. Verify the installation
@@ -82,7 +70,4 @@ If the command doesn't load:
    (lldb) script print("Python is working")
    ```
 
-4. Try manually importing in LLDB:
-   ```
-   (lldb) command script import ~/.lldb/aik_bt.py
-   ```
+
