@@ -54,6 +54,10 @@ To make `lldb-15` the default `lldb`, you can use update-alternatives:
 sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-15 100
 ```
 
+```bash
+echo "export PYTHONPATH=/usr/lib/llvm-15/lib/python3.10/dist-packages:$PYTHONPATH" >> ~/.bashrc
+```
+
 ### 5. Verify the installation
 
 Start LLDB and check if the command is loaded:
