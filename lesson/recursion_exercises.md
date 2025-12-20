@@ -58,7 +58,7 @@ The backtrace shows each frame with its return address — how the call stack bu
 This sequence helps to see the return address in stack frames:
 ```
 (lldb) p/x $pc          # current location
-(lldb) si               # step into the function
+(lldb) step             # step into the function
 (lldb) p/x $pc          # now at function start
 (lldb) frame info       # shows return address
 ```
