@@ -9,3 +9,5 @@
 8. [LLDB more commands](./lldb/lldb_more_commands.md)  
 9. [How nature really works?](./lesson/how_nature_really_works.md)  
 10. [Solution for Recursive programs](./solutions/recursion_solutions.md)  
+11. [API GET method explore the response details](./lesson/weather_api_exercises.md)      
+    
