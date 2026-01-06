@@ -16,55 +16,37 @@ def get_db_connection():
 # Route 1: Home page (HTML)
 @app.route('/')
 def home():
-    print("Route: GET / - Serving home page")
     return render_template('index.html')
 
 # Route 2: Get all students with optional grade filter (JSON)
 @app.route('/api/students', methods=['GET'])
 def get_students():
-    print("\nRoute: GET /api/students")
-
-    # Get query parameter
     grade_filter = request.args.get('grade')
-    print(f"Query parameter 'grade': {grade_filter}")
-
     conn = get_db_connection()
 
     if grade_filter:
-        print(f"Filtering students by grade: {grade_filter}")
         students = conn.execute(
             'SELECT * FROM students WHERE grade = ?',
             (grade_filter,)
         ).fetchall()
     else:
-        print("Getting all students (no filter)")
         students = conn.execute('SELECT * FROM students').fetchall()
 
     conn.close()
 
-    # Convert to list of dictionaries
     students_list = [dict(student) for student in students]
-    print(f"Found {len(students_list)} students")
-    print(f"Returning JSON: {students_list}")
-
     return jsonify(students_list)
 
 # Route 3: Add new student (JSON body)
 @app.route('/api/students', methods=['POST'])
 def add_student():
-    print("\nRoute: POST /api/students")
-
-    # Get JSON data from request body
     data = request.get_json()
-    print(f"Received JSON data: {data}")
 
     # Validate required fields
     required_fields = ['name', 'age', 'grade', 'email']
     for field in required_fields:
         if field not in data:
-            error_msg = f"Missing required field: {field}"
-            print(f"ERROR: {error_msg}")
-            return jsonify({'error': error_msg}), 400
+            return jsonify({'error': f"Missing required field: {field}"}), 400
 
     # Insert into database
     conn = get_db_connection()
@@ -77,8 +59,6 @@ def add_student():
     student_id = cursor.lastrowid
     conn.close()
 
-    print(f"Successfully created student with ID: {student_id}")
-
     return jsonify({
         'message': 'Student added successfully',
         'id': student_id
@@ -87,8 +67,6 @@ def add_student():
 # Route 4: Get student by ID (JSON)
 @app.route('/api/students/<int:student_id>', methods=['GET'])
 def get_student_by_id(student_id):
-    print(f"\nRoute: GET /api/students/{student_id}")
-
     conn = get_db_connection()
     student = conn.execute(
         'SELECT * FROM students WHERE id = ?',
@@ -97,24 +75,16 @@ def get_student_by_id(student_id):
     conn.close()
 
     if student is None:
-        print(f"ERROR: Student with ID {student_id} not found")
         return jsonify({'error': 'Student not found'}), 404
 
-    student_dict = dict(student)
-    print(f"Found student: {student_dict}")
-
-    return jsonify(student_dict)
+    return jsonify(dict(student))
 
 # Route 5: View students page (HTML with server-side rendering)
 @app.route('/view/students')
 def view_students():
-    print("\nRoute: GET /view/students - Rendering HTML table")
-
     conn = get_db_connection()
     students = conn.execute('SELECT * FROM students').fetchall()
     conn.close()
-
-    print(f"Rendering {len(students)} students in HTML")
 
     return render_template('students.html', students=students)
 
